@@ -1,0 +1,17 @@
+
+
+div.kurzus{
+    border-radius: 35px;
+    position: absolute;
+    height: 300px;
+    border: 1px black solid;
+}
+
+div.szin{
+    position: relative;
+    width: 100%;
+    height: 100px;
+    border-radius: 35px 35px 0 0;
+    background-color: aqua;
+
+}
