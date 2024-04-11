@@ -8,13 +8,21 @@
     <title>Kurzusok</title>
 </head>
 <nav>
-    <div class="row d-flex flex-row-reverse">
-        <button>Kurzus hozzáadása</button>
-        <button>Diák hozzáadása</button>
+    <div class="row d-flex flex-row-reverse align-items-center" style="height: 100%;">
+        <button onclick="Kurzus_Hozzadasa()">Kurzus hozzáadása</button>
+        <button onclick="Diak_Hozzadasa()">Diák hozzáadása</button>
     </div>
 </nav>
 <body>
     <h1>Kurzusok</h1>
+    <div id="popup" class="popup">
+        <div class="popup-content">
+            <span class="close" onclick="closePopup('popup')">&times;</span>
+            <input type="text" id="kurzus_Nev">
+            inpu
+          <button>Hozzáadása</button>
+        </div>
+      </div>
     <div class="row d-flex flew-wrap justify-content-around" id="kurzusok">
         <div class="kurzus">
             <div class="szin">
@@ -26,4 +34,5 @@
     </div>
 </body>
 <script src="app.js"></script>
+<script src="popup.js"></script>
 </html>

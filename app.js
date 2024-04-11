@@ -30,9 +30,9 @@ function fetchData(url) {
 function Szin_Kikeverese(str){
     numbers = str.split("").map(c => c.charCodeAt(0)).sort(() => Math.random() - 0.5).join("")
     console.log(numbers)
-    const red = (parseInt(numbers.slice(0, 3)) / 999) * 200;
-    const green = (parseInt(numbers.slice(3, 6)) / 999) * 200;
-    const blue = (parseInt(numbers.slice(6, 9)) / 999) * 200;
+    const red = (parseInt(numbers.slice(0, 3)) / 350) * 256;
+    const green = (parseInt(numbers.slice(3, 6)) / 350) * 256;
+    const blue = (parseInt(numbers.slice(6, 9)) / 350) * 256;
     console.log(red,green,blue)
     return `rgb(${red},${green},${blue})`
 }
@@ -55,5 +55,13 @@ function Kurzusok_frisitese(kurzusok){
 }
 
 function Diakok_Lekerdezese(url){
+
+}
+
+function Kurzus_Hozzadasa(){
+  openPopup("popup");
+}
+
+function Diak_Hozzadasa(){
 
 }
