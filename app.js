@@ -57,11 +57,3 @@ function Kurzusok_frisitese(kurzusok){
 function Diakok_Lekerdezese(url){
 
 }
-
-function Kurzus_Hozzadasa(){
-  openPopup("popup");
-}
-
-function Diak_Hozzadasa(){
-
-}

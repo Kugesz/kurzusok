@@ -4,22 +4,36 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@4.3.1/dist/css/bootstrap.min.css" integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T" crossorigin="anonymous">
+    <link rel="stylesheet" href="css/kurzus.css">
+    <link rel="stylesheet" href="css/popup.css">
     <link rel="stylesheet" href="style.css">
     <title>Kurzusok</title>
 </head>
 <nav>
     <div class="row d-flex flex-row-reverse align-items-center" style="height: 100%;">
-        <button onclick="Kurzus_Hozzadasa()">Kurzus hozzáadása</button>
-        <button onclick="Diak_Hozzadasa()">Diák hozzáadása</button>
+        <button onclick="openPopup('kurzusPopUp')">Kurzus hozzáadása</button>
+        <button onclick="openPopup('diakPopUp')">Diák hozzáadása</button>
     </div>
 </nav>
 <body>
     <h1>Kurzusok</h1>
-    <div id="popup" class="popup">
+    <div id="kurzusPopUp" class="popup kurzusPopUp">
         <div class="popup-content">
-            <span class="close" onclick="closePopup('popup')">&times;</span>
-            <input type="text" id="kurzus_Nev">
-            inpu
+            <span class="close" onclick="closePopup('kurzusPopUp')">&times;</span>
+            <h2>Kurzus neve</h2>
+            <input type="text" id="kurzus_Nev"></input>
+            <h2>Kurzushoz tartozó diákok</h2>
+            <div id="kivalaszottak"></div>
+            <input id="input" type="text" oninput="UjInput(event)">
+            <div id="helyetessitesek" class="helyetesitett_itemek"></div>
+          <button>Hozzáadása</button>
+        </div>
+      </div>
+      <div id="diakPopUp" class="popup diakPopUp">
+        <div class="popup-content">
+            <span class="close" onclick="closePopup('diakPopUp')">&times;</span>
+            <h2>Diák neve</h2>
+            <input type="text" id="diak_Nev"></input>
           <button>Hozzáadása</button>
         </div>
       </div>
@@ -35,4 +49,5 @@
 </body>
 <script src="app.js"></script>
 <script src="popup.js"></script>
+<script src="autocomplate.js"></script>
 </html>

@@ -1,0 +1,20 @@
+<!DOCTYPE html>
+<html lang="hu">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="test.css">
+    <title>test</title>
+</head>
+<body>
+    <div class="popUp">
+        <h2>Hozzáadás</h2>
+        <button onclick="closePopUp()" id="closeButton">X</button>
+        <div id="kivalaszottak"></div>
+        <input id="input" type="text" oninput="UjInput(event)">
+        <div id="helyetessitesek" class="helyetesitett_itemek"></div>
+        <button>Hozzáadás</button>
+    </div>
+</body>
+<script src="test.js"></script>
+</html>
