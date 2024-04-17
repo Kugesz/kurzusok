@@ -1,8 +1,19 @@
 kivalasztottDiakok = []
 
-function UjInput(event){
-    diakok = [{"id": 3, "name": "Cedric"}, {"id": 4, "name": "Daniel"}, {"id": 5, "name": "Edgar"}, {"id": 8, "name": "J\u00f3n\u00e1s"}, {"id": 9, "name": "Benedek"}, {"id": 10, "name": "string"}]
+diakok =[]
 
+function Frissites(){
+  fetchData('students')
+  .then(data => {
+
+    diakok = data;
+  })
+  .catch(error => {
+    console.error(error);
+  });
+}
+
+function UjInput(event){
     const input = event.target.value.toLowerCase();
     const helyettesitesekContainer = document.getElementById("helyetessitesek");
 
@@ -15,11 +26,9 @@ function UjInput(event){
     //AUTOCOMPLE
     diakok.forEach(diak => {
         nev = diak.name.toLowerCase();
-        console.log(input)
 
         //Ha nincsen meg a kivalasztottak között és megegyezik a szokezdesevel akkor jelenitjuk meg
         if(!kivalasztottDiakok.includes(nev) && nev.startsWith(input)){
-            console.log("Egyezes: " + nev, input)
 
             const item = document.createElement("div");
             item.textContent = diak.name;
@@ -43,7 +52,7 @@ function addTag(diak) {
     const tag = document.createElement("div");
 
     tag.classList.add("kivalasztott");
-    tag.innerHTML = `<span class="tag-text">${nev}</span><span class="close" onclick="removeTag(event, '${nev}')">&times;</span>`;
+    tag.innerHTML = `<span class="tag-text">${nev}</span><span class="removeTag" onclick="removeTag(event, '${nev}')">&times;</span>`;
 
     kivalaszottakContainer.appendChild(tag);
   }

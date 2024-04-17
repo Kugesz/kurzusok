@@ -20,21 +20,28 @@
     <div id="kurzusPopUp" class="popup kurzusPopUp">
         <div class="popup-content">
             <span class="close" onclick="closePopup('kurzusPopUp')">&times;</span>
+
             <h2>Kurzus neve</h2>
-            <input type="text" id="kurzus_Nev"></input>
+            <input type="text" id="kurzusNev" autocomplete="off"></input>
+            <p id="errorNev" class="error"></p>
+
             <h2>Kurzushoz tartozó diákok</h2>
+
             <div id="kivalaszottak"></div>
-            <input id="input" type="text" oninput="UjInput(event)">
+            <input id="input" type="text" oninput="UjInput(event)" autocomplete="off">
             <div id="helyetessitesek" class="helyetesitett_itemek"></div>
-          <button>Hozzáadása</button>
+
+            <button class="hozzadas">Hozzáadása</button>
         </div>
       </div>
       <div id="diakPopUp" class="popup diakPopUp">
         <div class="popup-content">
             <span class="close" onclick="closePopup('diakPopUp')">&times;</span>
+
             <h2>Diák neve</h2>
-            <input type="text" id="diak_Nev"></input>
-          <button>Hozzáadása</button>
+            <input type="text" id="diakNev" autocomplete="off"></input>
+            <p id="errorNev" class="error"></p>
+            <button class="hozzadas">Hozzáadása</button>
         </div>
       </div>
     <div class="row d-flex flew-wrap justify-content-around" id="kurzusok">
@@ -43,11 +50,11 @@
                 <h2>Történelem</h2>
             </div>
             <div class="line"></div>
-            
         </div>
     </div>
 </body>
 <script src="app.js"></script>
-<script src="popup.js"></script>
-<script src="autocomplate.js"></script>
+<script src="js/popup.js"></script>
+<script src="js/autocomplate.js"></script>
+<script src="js/fetchData.js"></script>
 </html>
