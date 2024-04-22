@@ -27,11 +27,12 @@
 
             <h2>Kurzushoz tartozó diákok</h2>
 
-            <div id="kivalaszottak"></div>
-            <input id="input" type="text" oninput="UjInput(event)" autocomplete="off">
-            <div id="helyetessitesek" class="helyetesitett_itemek"></div>
+            <div id="kivalaszottakDiak"></div>
+            <input class="input" type="text" oninput="UjInput(event)" autocomplete="off">
+            <p id="errorKurzus" class="error"></p>
+            <div id="helyetessitesekDiak" class="helyetesitett_itemek"></div>
 
-            <button class="hozzadas">Hozzáadása</button>
+            <button class="hozzadas"onClick="Hozzaadas('kurzusNev')">Hozzáadása</button>
         </div>
       </div>
       <div id="diakPopUp" class="popup diakPopUp">
@@ -39,9 +40,17 @@
             <span class="close" onclick="closePopup('diakPopUp')">&times;</span>
 
             <h2>Diák neve</h2>
+
             <input type="text" id="diakNev" autocomplete="off"></input>
             <p id="errorNev" class="error"></p>
-            <button class="hozzadas">Hozzáadása</button>
+
+            <h2>Kurzus kiválasztása</h2>
+
+            <div id="kivalaszottakKurzus"></div>
+            <input class="input" id="kurzusInput" type="text" oninput="UjInput(event)" autocomplete="off">
+
+            <div id="helyetessitesekKurzus" class="helyetesitett_itemek"></div>
+            <button class="hozzadas"onClick="Hozzaadas('diakNev')">Hozzáadása</button>
         </div>
       </div>
     <div class="row d-flex flew-wrap justify-content-around" id="kurzusok">
