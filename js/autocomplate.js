@@ -1,60 +1,83 @@
-kivalasztottDiakok = [];
+kivAdatok = [];
 
-diakok = [];
+adatok = [];
 
-let container;
-let kivalaszottak;
+let helyContainer;
+let kivContainer;
 
 function Frissites(id) {
   switch (id) {
     case "kurzusPopUp":
       id = "students";
-      container = "helyetessitesekDiak";
-      kivalaszottak = "kivalaszottakDiak";
+      helyContainer = document.getElementById("helyetessitesekDiak");
+      kivContainer = document.getElementById("kivalaszottakDiak");
       break;
     case "diakPopUp":
       id = "courses";
-      container = "helyetessitesekKurzus";
-      kivalaszottak = "kivalaszottakKurzus";
+      helyContainer = document.getElementById("helyetessitesekKurzus");
+      kivContainer = document.getElementById("kivalaszottakKurzus");
       break;
   }
-  console.log(id);
-  getData(id)
-    .then((data) => {
-      diakok = data;
-    })
-    .catch((error) => {
-      console.error(error);
-    });
+
+  //Adatok kikerese
+  (async () => {
+    adatok = await getData(id);
+    if(typeof adatok == "object"){
+      console.log("Szukseges adatok sikeres betoltese az automatikus kitolteshez!")
+    }
+  })();
+};
+
+function LetezoAdatokBetoltese(marKivalasztottak){
+  kivAdatok = marKivalasztottak;
+  console.log(kivAdatok);
+  helyContainer = document.getElementById("helyetessitesekDiakKurzusban");
+  kivContainer = document.getElementById("kivalaszottakDiakKurzusban");
+
+  console.log(helyContainer);
+  console.log(kivContainer)
+
+  //Betoltes
+  kivAdatok.forEach(adat =>{
+    console.log(adat)
+    const tag = document.createElement("div");
+    tag.classList.add("kivalasztott");
+    tag.innerHTML = `<span class="tag-text">${nev}</span><span class="removeTag" onclick="removeTag(event, '${nev}')">&times;</span>`;
+  
+    kivContainer.appendChild(tag);
+  });
 }
 
+
 function UjInput(event) {
-  console.log(diakok);
+  console.log(adatok);
   const input = event.target.value.toLowerCase();
-  const helyettesitesekContainer = document.getElementById(container);
+  
 
   //0 a kitöltéseket
-  helyettesitesekContainer.innerHTML = "";
+  console.log("HTML container: " + helyContainer)
+  console.log("ID: " + container)
+  helyContainer.innerHTML = "";
 
   if (!input) {
     return;
   }
 
   //AUTOCOMPLE
-  diakok.forEach((diak) => {
+  adatok.forEach((diak) => {
     nev = diak.name.toLowerCase();
 
     //Ha nincsen meg a kivalasztottak között és megegyezik a szokezdesevel akkor jelenitjuk meg
-    if (!kivalasztottDiakok.includes(nev) && nev.startsWith(input)) {
+    if (!kivAdatok.includes(nev) && nev.startsWith(input)) {
       const item = document.createElement("div");
       item.textContent = diak.name;
       item.addEventListener("click", () => {
         addTag(diak);
         event.target.value = "";
-        helyettesitesekContainer.innerHTML = "";
+        helyContainer.innerHTML = "";
       });
 
-      helyettesitesekContainer.appendChild(item);
+      helyContainer.appendChild(item);
     }
   });
 }
@@ -62,24 +85,23 @@ function UjInput(event) {
 function addTag(diak) {
   nev = diak.name;
 
-  kivalasztottDiakok.push(nev.toLowerCase());
+  kivAdatok.push(nev.toLowerCase());
 
-  const kivalaszottakContainer = document.getElementById(kivalaszottak);
   const tag = document.createElement("div");
 
   tag.classList.add("kivalasztott");
   tag.innerHTML = `<span class="tag-text">${nev}</span><span class="removeTag" onclick="removeTag(event, '${nev}')">&times;</span>`;
 
-  kivalaszottakContainer.appendChild(tag);
+  kivContainer.appendChild(tag);
   if (container == "helyetessitesekKurzus") {
     document.getElementById("kurzusInput").style = "display: none";
   }
 }
 
 function removeTag(event, diak) {
-  const index = kivalasztottDiakok.indexOf(diak.toLowerCase());
+  const index = kivAdatok.indexOf(diak.toLowerCase());
   if (index !== -1) {
-    kivalasztottDiakok.splice(index, 1);
+    kivAdatok.splice(index, 1);
     event.target.parentElement.remove();
   }
 
@@ -89,11 +111,10 @@ function removeTag(event, diak) {
 }
 
 document.addEventListener("click", function (event) {
-  const autocompleteList = document.getElementById(container);
   if (
-    event.target !== autocompleteList &&
+    event.target !== helyContainer &&
     event.target !== document.getElementById("myInput")
   ) {
-    autocompleteList.innerHTML = "";
+    helyContainer.innerHTML = "";
   }
 });

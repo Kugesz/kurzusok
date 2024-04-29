@@ -1,6 +1,4 @@
 function openPopup(id) {
-  Frissites(id);
-
   document.getElementById(id).style.display = "flex";
 }
 
@@ -11,6 +9,8 @@ function closePopup(id) {
 function Hozzaadas(id) {
   console.log(id);
   input = document.getElementById(id).value;
+
+  //Ha nem megfelelő a megadott input hiba kiirasa
   if (!input) {
     switch (id) {
       case "kurzusNev":
@@ -23,16 +23,14 @@ function Hozzaadas(id) {
         break;
     }
     return;
-  } else {
-    switch (id) {
-      case "kurzusNev":
-        document.getElementById("errorKurzus").innerText = "";
-        break;
-      case "diakNev":
-        document.getElementById("errorNev").innerText = "";
-        break;
-    }
   }
-
-  postStudent(input);
+  switch (id) {
+    case "kurzusNev":
+      document.getElementById("errorKurzus").innerText = "";
+      break;
+    case "diakNev":
+      document.getElementById("errorNev").innerText = "";
+      postStudent(input);
+      break;
+  }
 }

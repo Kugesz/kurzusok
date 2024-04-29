@@ -11,8 +11,8 @@
 </head>
 <nav>
     <div class="row d-flex flex-row-reverse align-items-center" style="height: 100%;">
-        <button onclick="openPopup('kurzusPopUp')">Kurzus hozzáadása</button>
-        <button onclick="openPopup('diakPopUp')">Diák hozzáadása</button>
+        <button onclick="openPopup('kurzusPopUp'),Frissites('kurzusPopUp')">Kurzus hozzáadása</button>
+        <button onclick="openPopup('diakPopUp'),Frissites('diakPopUp')">Diák hozzáadása</button>
     </div>
 </nav>
 <body>
@@ -53,6 +53,25 @@
             <button class="hozzadas"onClick="Hozzaadas('diakNev')">Hozzáadása</button>
         </div>
       </div>
+
+      <div id="kurzusDiakHozzadasPopUp" class="popup diakPopUp">
+        <div class="popup-content">
+            <span class="close" onclick="closePopup('kurzusDiakHozzadasPopUp')">&times;</span>
+
+            <h2 id="popUpKurzusNeve"></h2>
+
+            <input type="text" id="diakNev" autocomplete="off"></input>
+            <p id="errorNev" class="error"></p>
+
+            <h2>Kurzus kiválasztása</h2>
+
+            <div id="kivalaszottakDiakKurzusban"></div>
+            <input class="input" id="kurzusInput" type="text" oninput="UjInput(event)" autocomplete="off">
+
+            <div id="helyetessitesekDiakKurzusban" class="helyetesitett_itemek"></div>
+            <button class="hozzadas"onClick="Hozzaadas('diakNev')">Hozzáadása</button>
+        </div>
+      </div>
     <div class="row d-flex flew-wrap justify-content-around" id="kurzusok">
         <div class="kurzus">
             <div class="szin">
@@ -62,8 +81,8 @@
         </div>
     </div>
 </body>
-<script src="app.js"></script>
+<script src="js/fetchData.js"></script>
 <script src="js/popup.js"></script>
 <script src="js/autocomplate.js"></script>
-<script src="js/fetchData.js"></script>
+<script src="app.js"></script>
 </html>
