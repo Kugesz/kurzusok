@@ -9,17 +9,19 @@ let helyContainer;
 let kivContainer;
 
 function Frissites(id) {
+  console.log("frissites " + id);
   [kivAdatok, adatok, marKivalasztottak, toroltAdatok] = [[],[],[],[]]
+  Alaphelyzet(id);
   switch (id) {
     case "kurzusPopUp":
       id = "students";
-      helyContainer = document.getElementById("helyetessitesekDiak");
-      kivContainer = document.getElementById("kivalaszottakDiak");
+      helyContainer = document.getElementById("helyDiak");
+      kivContainer = document.getElementById("kivDiak");
       break;
     case "diakPopUp":
       id = "courses";
-      helyContainer = document.getElementById("helyetessitesekKurzus");
-      kivContainer = document.getElementById("kivalaszottakKurzus");
+      helyContainer = document.getElementById("helyKurzus");
+      kivContainer = document.getElementById("kivKurzus");
       break;
   }
 
@@ -32,11 +34,12 @@ function Frissites(id) {
   })();
 };
 
-function LetezoAdatokBetoltese(marKivalasztot){
+function letezoAdatokBetoltese(marKivalasztot){
+  console.log("letezo adatok betoltese");
   kivAdatok = [];
   marKivalasztottak = marKivalasztot;
-  helyContainer = document.getElementById("helyetessitesekDiakKurzusban");
-  kivContainer = document.getElementById("kivalaszottakDiakKurzusban");
+  helyContainer = document.getElementById("helyDiakKurzusban");
+  kivContainer = document.getElementById("kurzusDiakPopUp");
 
   //Betoltes
   marKivalasztottak.forEach(adat =>{
@@ -50,7 +53,8 @@ function LetezoAdatokBetoltese(marKivalasztot){
 }
 
 
-function UjInput(event) {
+function ujInput(event) {
+  console.log("uj input");
   const input = event.target.value.toLowerCase();
   
 
@@ -91,7 +95,7 @@ function addTag(diak) {
   tag.innerHTML = `<span class="tag-text">${nev}</span><span class="removeTag" onclick="removeTag(event, '${nev}')">&times;</span>`;
 
   kivContainer.appendChild(tag);
-  if (helyContainer.id == "helyetessitesekKurzus") {
+  if (helyContainer.id == "helyKurzus") {
     document.getElementById("kurzusInput").style = "display: none";
   }
 }
@@ -113,7 +117,7 @@ function removeTag(event, diak) {
     event.target.parentElement.remove();
   }
 
-  if (helyContainer.id == "helyetessitesekKurzus") {
+  if (helyContainer.id == "helyKurzus") {
     document.getElementById("kurzusInput").style = "display: inline-block";
   }
 }

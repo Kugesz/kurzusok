@@ -1,6 +1,6 @@
 function openPopup(id) {
   document.getElementById(id).style.display = "flex";
-
+  console.log("open popup");
   Alaphelyzet(id);
 }
 
@@ -9,6 +9,7 @@ function closePopup(id) {
 }
 
 function hibaEllenorzese(id) {
+  console.log("hibaEllenorzese");
   input = document.getElementById(id).value;
   
   //Ha nem megfelelő a megadott input hiba kiirasa
@@ -39,11 +40,17 @@ function hibaEllenorzese(id) {
 }
 
 function Alaphelyzet(id){
+  id = id.replace("PopUp" , "")
+  console.log("Alaphelyzet");
   console.log(id)
-  console.log("df")
+  try{
+  document.getElementById(`${id}Nev`).value = "";
+  }catch(err){console.log(err);}
+
   switch(id){
-    case "kurzusPopUp": document.getElementById("kivalaszottakDiak").innerHTML = ``; break;
-    case "diakPopUp": document.getElementById.innerHTML = ``; break;
-    case "kurzusDiakHozzadasPopUp": document.getElementById("kivalaszottakDiakKurzusban").innerHTML = ``; break;
+    case "diak": id = "Kurzus"; break;
+    case "kurzus": id = "Diak"; break;
+    case "kurzusDiakHozzadas": document.getElementById("kurzusDiakPopUp").innerHTML = ``; return; break;
   }
+  document.getElementById(`kiv${id}`).innerHTML = ``;
 }

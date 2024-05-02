@@ -47,11 +47,11 @@
 
   /* AUTOFILL */
 
-  .helyetessitesek {
+  .hely {
     position: relative;
   }
   
-  .kivalaszottak {
+  .kiv {
     display: flex;
     flex-wrap: wrap;
     align-items: center;

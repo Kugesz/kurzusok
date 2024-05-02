@@ -4,44 +4,57 @@ window.onload = function () {
       kurzusok = await getData('courses');
       if(typeof kurzusok == "object"){
         console.log("Kurzusok siekres betoltese!")
-        Kurzusok_frisitese(kurzusok);
+        kurzusokFrissitese(kurzusok);
       }
     })();
   };
   
-  function Szin_Kikeverese(str) {
+  function szinKikeverese(str) {
     if(!str){
       return `rgb(256,256,256)`;
     }
-    numbers = str
-      .split("")
-      .map((c) => c.charCodeAt(0))
-      .sort(() => Math.random() - 0.5)
-      .join("");
-    const red = (parseInt(numbers.slice(0, 3)) / 350) * 256;
-    const green = (parseInt(numbers.slice(3, 6)) / 350) * 256;
-    const blue = (parseInt(numbers.slice(6, 9)) / 350) * 256;
+
+    letters = str.split("").splice(0,3)
+    const red = (letterToNumber(letters[0]) / 26) * 256;
+    const green = (letterToNumber(letters[1]) / 26) * 256;
+    const blue = (letterToNumber(letters[2]) / 26) * 256;
     return `rgb(${red},${green},${blue})`;
+
+
+    //Gyorsan lopott kod :)
+    function letterToNumber(letter) {
+
+      //Ellenorzes mivel sok az emoji a nevek kozott
+      if(!/^[A-Za-z]$/.test(letter)){
+        return 13;
+      }
+      letter = letter.toUpperCase();
+      var asciiA = 'A'.charCodeAt(0);
+      var asciiLetter = letter.charCodeAt(0);
+      var position = asciiLetter - asciiA + 1;
+      
+      return position;
+    }
   }
   
-  function Kurzusok_frisitese(kurzusok) {
+  function kurzusokFrissitese(kurzusok) {
     container = document.getElementById("kurzusok");
     container.innerHTML = "";
     kurzusok.forEach((kurzus) => {
       container.innerHTML += `
         <div class="kurzus" data-id = "${kurzus.id}">
-            <div class="szin" style="background-color: ${Szin_Kikeverese(kurzus.name)};">
+            <div class="szin" style="background-color: ${szinKikeverese(kurzus.name)};">
                 <h2>${kurzus.name}</h2>
             </div>
             <div class="line"></div>
-            <button class="addButton" onClick="DiakKurzushozAdasa('${kurzus.id}','${kurzus.name}')">+</button>
+            <button class="addButton" onClick="diakKurzushozAdasa('${kurzus.id}','${kurzus.name}')">+</button>
         </div>`;
     });
   }
 
   let jelenlegiKurzusID;
 
-  function DiakKurzushozAdasa(kurzusID, kurzusNeve){
+  function diakKurzushozAdasa(kurzusID, kurzusNeve){
     Alaphelyzet("kurzusDiakHozzadasPopUp");
     document.getElementById("popUpKurzusNeve").innerText = kurzusNeve;
     jelenlegiKurzusID = kurzusID;
@@ -50,7 +63,7 @@ window.onload = function () {
       response = await getData(`courses/${kurzusID}`);
       kurzusDiakai = await response.students;
 
-      LetezoAdatokBetoltese(kurzusDiakai);
+      letezoAdatokBetoltese(kurzusDiakai);
       openPopup("kurzusDiakHozzadasPopUp");
     })();
   }
