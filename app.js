@@ -10,6 +10,9 @@ window.onload = function () {
   };
   
   function Szin_Kikeverese(str) {
+    if(!str){
+      return `rgb(256,256,256)`;
+    }
     numbers = str
       .split("")
       .map((c) => c.charCodeAt(0))
@@ -39,6 +42,7 @@ window.onload = function () {
   let jelenlegiKurzusID;
 
   function DiakKurzushozAdasa(kurzusID, kurzusNeve){
+    Alaphelyzet("kurzusDiakHozzadasPopUp");
     document.getElementById("popUpKurzusNeve").innerText = kurzusNeve;
     jelenlegiKurzusID = kurzusID;
     let kurzusDiakai;

@@ -9,7 +9,7 @@ let helyContainer;
 let kivContainer;
 
 function Frissites(id) {
-  kivAdatok = [];
+  [kivAdatok, adatok, marKivalasztottak, toroltAdatok] = [[],[],[],[]]
   switch (id) {
     case "kurzusPopUp":
       id = "students";
