@@ -1,11 +1,15 @@
 kivAdatok = [];
-
 adatok = [];
+
+marKivalasztottak = [];
+
+toroltAdatok = [];
 
 let helyContainer;
 let kivContainer;
 
 function Frissites(id) {
+  kivAdatok = [];
   switch (id) {
     case "kurzusPopUp":
       id = "students";
@@ -28,18 +32,15 @@ function Frissites(id) {
   })();
 };
 
-function LetezoAdatokBetoltese(marKivalasztottak){
-  kivAdatok = marKivalasztottak;
-  console.log(kivAdatok);
+function LetezoAdatokBetoltese(marKivalasztot){
+  kivAdatok = [];
+  marKivalasztottak = marKivalasztot;
   helyContainer = document.getElementById("helyetessitesekDiakKurzusban");
   kivContainer = document.getElementById("kivalaszottakDiakKurzusban");
 
-  console.log(helyContainer);
-  console.log(kivContainer)
-
   //Betoltes
-  kivAdatok.forEach(adat =>{
-    console.log(adat)
+  marKivalasztottak.forEach(adat =>{
+    nev = adat.name;
     const tag = document.createElement("div");
     tag.classList.add("kivalasztott");
     tag.innerHTML = `<span class="tag-text">${nev}</span><span class="removeTag" onclick="removeTag(event, '${nev}')">&times;</span>`;
@@ -50,13 +51,10 @@ function LetezoAdatokBetoltese(marKivalasztottak){
 
 
 function UjInput(event) {
-  console.log(adatok);
   const input = event.target.value.toLowerCase();
   
 
   //0 a kitöltéseket
-  console.log("HTML container: " + helyContainer)
-  console.log("ID: " + container)
   helyContainer.innerHTML = "";
 
   if (!input) {
@@ -68,7 +66,7 @@ function UjInput(event) {
     nev = diak.name.toLowerCase();
 
     //Ha nincsen meg a kivalasztottak között és megegyezik a szokezdesevel akkor jelenitjuk meg
-    if (!kivAdatok.includes(nev) && nev.startsWith(input)) {
+    if (!kivAdatok.map(x => x.name).includes(nev) && nev.startsWith(input)) {
       const item = document.createElement("div");
       item.textContent = diak.name;
       item.addEventListener("click", () => {
@@ -85,7 +83,7 @@ function UjInput(event) {
 function addTag(diak) {
   nev = diak.name;
 
-  kivAdatok.push(nev.toLowerCase());
+  kivAdatok.push(diak);
 
   const tag = document.createElement("div");
 
@@ -93,28 +91,38 @@ function addTag(diak) {
   tag.innerHTML = `<span class="tag-text">${nev}</span><span class="removeTag" onclick="removeTag(event, '${nev}')">&times;</span>`;
 
   kivContainer.appendChild(tag);
-  if (container == "helyetessitesekKurzus") {
+  if (helyContainer.id == "helyetessitesekKurzus") {
     document.getElementById("kurzusInput").style = "display: none";
   }
 }
 
 function removeTag(event, diak) {
-  const index = kivAdatok.indexOf(diak.toLowerCase());
-  if (index !== -1) {
-    kivAdatok.splice(index, 1);
+  nevekKiv = kivAdatok.map(x => x.name);
+  const indexKiv = nevekKiv.indexOf(diak);
+
+  nevekMeg = marKivalasztottak.map(x => x.name);
+  const indexMeg = nevekMeg.indexOf(diak);
+  if (indexKiv !== -1) {
+    kivAdatok.splice(indexKiv, 1);
     event.target.parentElement.remove();
   }
 
-  if (container == "helyetessitesekKurzus") {
+  if(indexMeg !== -1){
+    toroltAdatok.push(marKivalasztottak[indexMeg])
+    marKivalasztottak.splice(indexMeg, 1);
+    event.target.parentElement.remove();
+  }
+
+  if (helyContainer.id == "helyetessitesekKurzus") {
     document.getElementById("kurzusInput").style = "display: inline-block";
   }
 }
 
-document.addEventListener("click", function (event) {
-  if (
-    event.target !== helyContainer &&
-    event.target !== document.getElementById("myInput")
-  ) {
-    helyContainer.innerHTML = "";
-  }
-});
+// document.addEventListener("click", function (event) {
+//   if (
+//     event.target !== helyContainer &&
+//     event.target !== document.getElementById("myInput")
+//   ) {
+//     helyContainer.innerHTML = "";
+//   }
+// });

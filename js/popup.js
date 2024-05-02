@@ -7,7 +7,6 @@ function closePopup(id) {
 }
 
 function Hozzaadas(id) {
-  console.log(id);
   input = document.getElementById(id).value;
 
   //Ha nem megfelelő a megadott input hiba kiirasa

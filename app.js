@@ -26,23 +26,35 @@ window.onload = function () {
     container.innerHTML = "";
     kurzusok.forEach((kurzus) => {
       container.innerHTML += `
-        <div class="kurzus">
+        <div class="kurzus" data-id = "${kurzus.id}">
             <div class="szin" style="background-color: ${Szin_Kikeverese(kurzus.name)};">
                 <h2>${kurzus.name}</h2>
             </div>
             <div class="line"></div>
-            <button class="addButton" onClick=DiakKurzushozAdasa("${kurzus.id}","${kurzus.name}")>+</button>
+            <button class="addButton" onClick="DiakKurzushozAdasa('${kurzus.id}','${kurzus.name}')">+</button>
         </div>`;
     });
   }
 
+  let jelenlegiKurzusID;
+
   function DiakKurzushozAdasa(kurzusID, kurzusNeve){
     document.getElementById("popUpKurzusNeve").innerText = kurzusNeve;
+    jelenlegiKurzusID = kurzusID;
     let kurzusDiakai;
     (async () =>{
       response = await getData(`courses/${kurzusID}`);
-      kurzusDiakai = response.students;
+      kurzusDiakai = await response.students;
+
       LetezoAdatokBetoltese(kurzusDiakai);
       openPopup("kurzusDiakHozzadasPopUp");
     })();
+  }
+
+  function Hozzaadas(id){
+    switch(id){
+      case "kurzusNev": postCourse(document.getElementById("kurzusNev").value, kivAdatok); closePopup("kurzusPopUp"); break;
+      case "diakNev": postStudent(document.getElementById("diakNev").value, kivAdatok[0].id); closePopup("diakPopUp"); break;
+      case "kurzusFrissites": updateCourse(jelenlegiKurzusID, kivAdatok, toroltAdatok); break;
+    }
   }

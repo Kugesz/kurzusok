@@ -4,6 +4,7 @@ div.kurzus{
     height: 300px;
     width: 220px;
     padding: 0;
+    margin: 10px;
     overflow: hidden;
     box-shadow: 0 0 10px 8px rgba(0, 0, 0, 0.125);
 }

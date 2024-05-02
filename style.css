@@ -1,11 +1,16 @@
-body{
+html{
     width: 100vw;
+}
+
+body{
+    width: 100%;
 }
 h1{
     text-align: center;
 }
 
 nav{
+    width: 100vw;
     height: 50px;
 }
 
@@ -15,4 +20,8 @@ nav button{
     border-radius: 28px;
     padding: 5px 10px;
     margin-right: 50px;
+}
+
+.removeTag {
+    cursor: pointer;
 }

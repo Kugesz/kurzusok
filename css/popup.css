@@ -111,3 +111,7 @@
   .error {
     color: red;
   }
+
+  .tag-text{
+    border-radius: 1px;
+  }
