@@ -55,7 +55,7 @@ window.onload = function () {
   let jelenlegiKurzusID;
 
   function diakKurzushozAdasa(kurzusID, kurzusNeve){
-    Alaphelyzet("kurzusDiakHozzadasPopUp");
+    openPopup("kurzusDiakHozzadasPopUp");
     document.getElementById("popUpKurzusNeve").innerText = kurzusNeve;
     jelenlegiKurzusID = kurzusID;
     let kurzusDiakai;
@@ -64,7 +64,6 @@ window.onload = function () {
       kurzusDiakai = await response.students;
 
       letezoAdatokBetoltese(kurzusDiakai);
-      openPopup("kurzusDiakHozzadasPopUp");
     })();
   }
 

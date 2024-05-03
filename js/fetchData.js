@@ -85,7 +85,7 @@ function putStudent(id, nev, kurzusId){
     });
 }
 
-function updateCourse(id, diakok, toroltDiakok){í
+function updateCourse(id, diakok, toroltDiakok){
   toroltDiakok.forEach(diak => {
     putStudent(diak.id, diak.name, 0)
   })

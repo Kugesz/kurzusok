@@ -48,9 +48,12 @@ function Alaphelyzet(id){
   }catch(err){console.log(err);}
 
   switch(id){
-    case "diak": id = "Kurzus"; break;
+    case "diak":
+      id = "Kurzus";
+      document.getElementById("kurzusInput").style = "display: inline-block";
+      break;
     case "kurzus": id = "Diak"; break;
-    case "kurzusDiakHozzadas": document.getElementById("kurzusDiakPopUp").innerHTML = ``; return; break;
+    case "kurzusDiakHozzadas": document.getElementById("kurzusDiakPopUp").innerHTML = ``;  return; break;
   }
   document.getElementById(`kiv${id}`).innerHTML = ``;
 }
