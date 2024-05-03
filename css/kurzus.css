@@ -1,10 +1,10 @@
 div.kurzus{
     border-radius: 28px;
     position: relative;
-    height: 300px;
-    width: 220px;
+    height: 360px;
+    width: 280px;
     padding: 0;
-    margin: 10px;
+    margin: 40px;
     overflow: hidden;
     box-shadow: 0 0 10px 8px rgba(0, 0, 0, 0.125);
 }
@@ -15,14 +15,12 @@ div.szin{
     left: 0;
     width: 100%;
     height: 100px;
-
-
 }
 
 div.line {
-    width: 220px; 
+    width: 280px; 
     height: 2px;
-    position: absolute; /* Change to absolute */
+    position: absolute;
     bottom: 15%;
     background-color: rgba(128, 128, 128, 0.48);
  }
@@ -36,9 +34,11 @@ div.line {
 }
 
 button.addButton{
+    font-size: 22px;
+    font-weight: 700;
     position: absolute;
     transform: translateY(-50%);
-    bottom: 0%;
+    bottom: -1%;
     right:7%;
     border: none;
     background-color: transparent;

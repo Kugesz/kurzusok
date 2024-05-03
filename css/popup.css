@@ -17,9 +17,9 @@
     position: relative;
     background-color: #fefefe;
     
-    padding: 20px;
+    padding: 80px;
     border: 1px solid #888;
-    width: 50%;
+    width: 30%;
     height: 80vh;
     border-radius: 28px;
   }
@@ -41,8 +41,17 @@
   }
 
   .hozzadas {
+    padding: 4%;
+    border-radius: 28px;
+    border: none;
+    position: absolute;
+    left: 50%;
     bottom: 4%;
-    translate: positionY(-50%);
+    transform: translate(-50%, -50%);
+  }
+
+  input {
+    width: 80%;
   }
 
   /* AUTOFILL */
@@ -65,7 +74,7 @@
     margin: 2px;
     display: flex;
     align-items: center;
-    display: inline;
+    display: inline-block;
   }
   
   .kivalasztott .kivalasztott-text {
