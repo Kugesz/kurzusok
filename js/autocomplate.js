@@ -1,3 +1,15 @@
+// ! Diak hozzadas nem mukodik nincsen error
+/*
+kivAdatok => Azok az adatok amik veglegesen lettek kivalasztva (azok az elemek amik az inputmezo felett jelennek meg)
+adatok => Azok az adatok amiket az API-bol ker ki
+
+marKivalasztottak => Olyan adatok amiket akkor hasznal amik a kurzusok szerkeszténél nyit meg
+
+toroltAdatok => Olyan adatok amiket a kurzus szerkesztesenel kitoroltek
+
+helyContainer => HTML-tag ahova az automatikus kitoltes elemei kerulnek
+kivContainer => HTML-ta ahova a kivalasztott elemek kerulnek
+*/
 kivAdatok = [];
 adatok = [];
 
@@ -50,6 +62,8 @@ function letezoAdatokBetoltese(marKivalasztot){
   
     kivContainer.appendChild(tag);
   });
+
+  console.log("kivAdatok: " + marKivalasztottak.map(x => x.name))
 }
 
 
@@ -67,19 +81,25 @@ function ujInput(event) {
 
   //AUTOCOMPLE
   adatok.forEach((diak) => {
-    nev = diak.name.toLowerCase();
-
-    //Ha nincsen meg a kivalasztottak között és megegyezik a szokezdesevel akkor jelenitjuk meg
-    if (!kivAdatok.map(x => x.name).includes(nev) && nev.startsWith(input)) {
-      const item = document.createElement("div");
-      item.textContent = diak.name;
-      item.addEventListener("click", () => {
-        addTag(diak);
-        event.target.value = "";
-        helyContainer.innerHTML = "";
-      });
-
-      helyContainer.appendChild(item);
+    try{
+      nev = diak.name.toLowerCase();
+  
+      //Ha nincsen meg a kivalasztottak között és megegyezik a szokezdesevel akkor jelenitjuk meg
+      if (!kivAdatok.map(x => x.name).includes(nev) && nev.startsWith(input)) {
+        const item = document.createElement("div");
+        item.textContent = diak.name;
+        item.addEventListener("click", () => {
+          addTag(diak);
+          event.target.value = "";
+          helyContainer.innerHTML = "";
+        });
+  
+        helyContainer.appendChild(item);
+      }
+    }catch(error)
+    {
+      console.log("Hiba lepett fel az autocomplet elemek megjelentisenel!");
+      console.log(error);
     }
   });
 }
