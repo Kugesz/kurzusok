@@ -15,9 +15,9 @@ window.onload = function () {
     }
 
     letters = str.split("").splice(0,3)
-    const red = (letterToNumber(letters[0]) / 26) * 256;
-    const green = (letterToNumber(letters[1]) / 26) * 256;
-    const blue = (letterToNumber(letters[2]) / 26) * 256;
+    const red = (letterToNumber(letters[0]) / 17) * 256;
+    const green = (letterToNumber(letters[1]) / 17) * 256;
+    const blue = (letterToNumber(letters[2]) / 17) * 256;
     return `rgb(${red},${green},${blue})`;
 
 
@@ -44,7 +44,7 @@ window.onload = function () {
       container.innerHTML += `
         <div class="kurzus" data-id = "${kurzus.id}">
             <div class="szin" style="background-color: ${szinKikeverese(kurzus.name)};">
-                <h2>${kurzus.name}</h2>
+                <h2>${stringRovidetes(kurzus.name)}</h2>
             </div>
             <div class="line"></div>
             <button class="addButton" onClick="diakKurzushozAdasa('${kurzus.id}','${kurzus.name}')">+</button>
@@ -52,13 +52,27 @@ window.onload = function () {
     });
   }
 
+  function stringRovidetes(str){
+    if(str.length > 19){
+      return str.split("").splice(0,16).join("") + "..."
+    }
+    return str;
+  }
+
   let jelenlegiKurzusID;
 
   function diakKurzushozAdasa(kurzusID, kurzusNeve){
     openPopup("kurzusDiakHozzadasPopUp");
+
+    //Kurzus nev megjelenitese
     document.getElementById("popUpKurzusNeve").innerText = kurzusNeve;
+
+    // Kurzus torlesenek adatai beallitasa
+    document.getElementById("torlesButton").setAttribute("onClick", `deleteData('courses', ${kurzusID})`);
     jelenlegiKurzusID = kurzusID;
     let kurzusDiakai;
+
+    //Kurzushoz tartozo diakok lekerese
     (async () =>{
       response = await getData(`courses/${kurzusID}`);
       kurzusDiakai = await response.students;
